@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sylvenix Inc. | Powering Nature. Connecting the Future.</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                primary: '#1F4D3A',      /* Forest Green */
+                accent: '#C9A65C',       /* Champagne Gold */
+                text: '#222222',         /* Charcoal */
+                accentDark: '#D4AF37',   /* Metallic Gold */
+                secondaryDark: '#6FA98A',/* Sage Green */
+                muted: '#6B6B6B',        /* Cool Gray */
+              }
+            },
+            fontFamily: {
+              heading: ['Montserrat', 'Century Gothic', 'sans-serif'],
+              serif: ['Georgia', 'serif'],
+              cn: ['"Noto Sans SC"', '"Source Han Sans"', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .brand-wordmark { font-family: 'Montserrat', sans-serif; letter-spacing: 0.06em; font-weight: 700; }
+      .brand-tagline { font-family: 'Georgia', serif; font-style: italic; }
+      .lang-cn .en-text { display: none !important; }
+      .lang-en .cn-text { display: none !important; }
+      
+      .bg-brand-gradient {
+        background: linear-gradient(135deg, #1F4D3A 0%, #153729 100%);
+      }
+      .text-gold-gradient {
+        background: linear-gradient(135deg, #D4AF37 0%, #C9A65C 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      [contenteditable="true"]:focus {
+        outline: 2px dashed #C9A65C !important;
+        background-color: rgba(201, 166, 92, 0.1);
+        border-radius: 4px;
+      }
+    </style>
+</head>
+<body class="lang-en text-brand-text bg-slate-50 flex flex-col min-h-screen" contenteditable="true">
+
+    <!-- 浮动控制面板 -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2" contenteditable="false">
+        <button onclick="saveChanges()" class="bg-brand-accent hover:bg-yellow-600 text-white px-5 py-3 rounded-full shadow-2xl font-bold flex items-center gap-2 text-sm transition-all transform hover:scale-105">
+            <i class="fa-solid fa-download"></i> 保存并下载修改后的 index.html
+        </button>
+    </div>
+
+    <!-- 1. HEADER / NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo Lockup -->
+                <a href="#home" onclick="showPage('home')" class="flex items-center gap-3" contenteditable="false">
+                    <img src="2.2_图标独立版_圆形.png" alt="Sylvenix Icon" class="h-10 w-10 object-contain">
+                    <div contenteditable="true">
+                        <div class="brand-wordmark text-xl text-brand-primary leading-tight">SYLVENIX</div>
+                        <div class="brand-tagline text-[10px] text-brand-muted hidden sm:block">Powering Nature. Connecting the Future.</div>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-4 xl:space-x-6 text-xs xl:text-sm font-bold text-gray-700">
+                    <a href="#home" onclick="showPage('home')" class="hover:text-brand-accent transition">HOME</a>
+                    <a href="#about" onclick="showPage('about')" class="hover:text-brand-accent transition">ABOUT</a>
+                    <a href="#what-we-do" onclick="showPage('what-we-do')" class="hover:text-brand-accent transition">WHAT WE DO</a>
+                    <a href="#products" onclick="showPage('products')" class="hover:text-brand-accent transition">PRODUCTS</a>
+                    <a href="#sourcing-markets" onclick="showPage('sourcing-markets')" class="hover:text-brand-accent transition">SOURCING & MARKETS</a>
+                    <a href="#projects" onclick="showPage('projects')" class="hover:text-brand-accent transition">PROJECTS</a>
+                    <a href="#sustainability" onclick="showPage('sustainability')" class="hover:text-brand-accent transition">SUSTAINABILITY</a>
+                    <a href="#investors" onclick="showPage('investors')" class="hover:text-brand-accent transition">INVESTORS</a>
+                    <a href="#contact" onclick="showPage('contact')" class="hover:text-brand-accent transition">CONTACT</a>
+                </nav>
+
+                <!-- Language Toggle -->
+                <div class="flex items-center gap-3" contenteditable="false">
+                    <button id="langBtn" onclick="toggleLanguage()" class="px-3 py-1 text-xs border border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-globe"></i>
+                        <span class="en-text">中文</span>
+                        <span class="cn-text">EN</span>
+                    </button>
+
+                    <button class="lg:hidden text-2xl text-brand-primary" onclick="toggleMobileMenu()">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-gray-200 px-6 pt-3 pb-6 space-y-3 font-semibold text-sm">
+            <a href="#home" onclick="showPage('home'); toggleMobileMenu();" class="block border-b pb-1">HOME</a>
+            <a href="#about" onclick="showPage('about'); toggleMobileMenu();" class="block border-b pb-1">ABOUT</a>
+            <a href="#what-we-do" onclick="showPage('what-we-do'); toggleMobileMenu();" class="block border-b pb-1">WHAT WE DO</a>
+            <a href="#products" onclick="showPage('products'); toggleMobileMenu();" class="block border-b pb-1">PRODUCTS</a>
+            <a href="#sourcing-markets" onclick="showPage('sourcing-markets'); toggleMobileMenu();" class="block border-b pb-1">SOURCING & MARKETS</a>
+            <a href="#projects" onclick="showPage('projects'); toggleMobileMenu();" class="block border-b pb-1">PROJECTS</a>
+            <a href="#sustainability" onclick="showPage('sustainability'); toggleMobileMenu();" class="block border-b pb-1">SUSTAINABILITY</a>
+            <a href="#investors" onclick="showPage('investors'); toggleMobileMenu();" class="block border-b pb-1">INVESTORS</a>
+            <a href="#contact" onclick="showPage('contact'); toggleMobileMenu();" class="block">CONTACT</a>
+        </div>
+    </header>
+
+    <!-- 页面主体内容区 -->
+    <main class="flex-grow">
+        
+        <!-- HOME PAGE -->
+        <section id="page-home" class="page-content">
+            <div class="bg-brand-gradient text-white py-24 px-4 text-center relative overflow-hidden">
+                <div class="max-w-4xl mx-auto space-y-6 relative z-10">
+                    <img src="2.2_图标独立版_圆形.png" alt="Sylvenix Logo" class="h-24 w-24 mx-auto mb-4 drop-shadow-lg" contenteditable="false">
+                    <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold brand-tagline text-gold-gradient">
+                        <span class="en-text">Powering Nature. Connecting the Future.</span>
+                        <span class="cn-text">赋能自然，连接未来</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-gray-200 max-w-3xl mx-auto font-light">
+                        <span class="en-text">From Resources to Energy. From Energy to Markets. From Markets to a Global Energy Ecosystem.</span>
+                        <span class="cn-text">从资源到能源，从能源到市场，从市场到全球能源生态系统。</span>
+                    </p>
+                    <div class="pt-6 flex flex-wrap justify-center gap-4" contenteditable="false">
+                        <button onclick="showPage('what-we-do')" class="bg-brand-accent hover:bg-yellow-600 text-white px-8 py-3 rounded-md font-bold shadow-lg transition">
+                            <span class="en-text" contenteditable="true">Explore What We Do</span>
+                            <span class="cn-text" contenteditable="true">探索我们的业务</span>
+                        </button>
+                        <button onclick="showPage('investors')" class="border border-white/60 hover:bg-white hover:text-brand-primary text-white px-8 py-3 rounded-md font-bold transition">
+                            <span class="en-text" contenteditable="true">Investor Information</span>
+                            <span class="cn-text" contenteditable="true">投资者信息</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ecosystem Strip -->
+            <div class="max-w-7xl mx-auto py-16 px-4">
+                <h2 class="text-center font-bold text-gray-400 text-xs tracking-widest uppercase mb-8">Ecosystem Pillars</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
+                    <div class="p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <i class="fa-solid fa-leaf text-3xl text-brand-primary mb-3" contenteditable="false"></i>
+                        <h3 class="font-bold text-sm text-brand-primary">Renewable Energy</h3>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <i class="fa-solid fa-globe text-3xl text-brand-primary mb-3" contenteditable="false"></i>
+                        <h3 class="font-bold text-sm text-brand-primary">Global Trading</h3>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <i class="fa-solid fa-store text-3xl text-brand-primary mb-3" contenteditable="false"></i>
+                        <h3 class="font-bold text-sm text-brand-primary">B2B Marketplace</h3>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <i class="fa-solid fa-truck-fast text-3xl text-brand-primary mb-3" contenteditable="false"></i>
+                        <h3 class="font-bold text-sm text-brand-primary">Smart Logistics</h3>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <i class="fa-solid fa-coins text-3xl text-brand-primary mb-3" contenteditable="false"></i>
+                        <h3 class="font-bold text-sm text-brand-primary">Supply Chain Finance</h3>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <i class="fa-solid fa-brain text-3xl text-brand-primary mb-3" contenteditable="false"></i>
+                        <h3 class="font-bold text-sm text-brand-primary">AI Energy Tech</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 其他页面区域 -->
+        <section id="page-about" class="page-content hidden py-16 px-4 max-w-5xl mx-auto"><h2 class="text-3xl font-bold text-brand-primary">About Sylvenix Inc.</h2></section>
+        <section id="page-what-we-do" class="page-content hidden py-16 px-4 max-w-6xl mx-auto"><h2 class="text-3xl font-bold text-brand-primary">The 6 Ecosystem Pillars</h2></section>
+        <section id="page-products" class="page-content hidden py-16 px-4 max-w-6xl mx-auto"><h2 class="text-3xl font-bold text-brand-primary">Biomass Products</h2></section>
+        <section id="page-sourcing-markets" class="page-content hidden py-16 px-4 max-w-5xl mx-auto"><h2 class="text-3xl font-bold">Sourcing & Markets</h2></section>
+        <section id="page-projects" class="page-content hidden py-16 px-4 max-w-5xl mx-auto"><h2 class="text-3xl font-bold">Projects</h2></section>
+        <section id="page-sustainability" class="page-content hidden py-16 px-4 max-w-5xl mx-auto"><h2 class="text-3xl font-bold">Sustainability</h2></section>
+        <section id="page-investors" class="page-content hidden py-16 px-4 max-w-5xl mx-auto"><h2 class="text-3xl font-bold">Investors</h2></section>
+
+        <!-- CONTACT PAGE (完全按照截图标注删除指定区域) -->
+        <section id="page-contact" class="page-content py-16 px-4 max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-brand-primary mb-8">Contact Us</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <!-- 左侧表单区域 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 space-y-5">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-2">Full Name</label>
+                        <input type="text" placeholder="John Doe" class="w-full px-4 py-2.5 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-brand-primary">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-2">Email Address</label>
+                        <input type="email" placeholder="john@example.com" class="w-full px-4 py-2.5 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-brand-primary">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-2">Message / Inquiry</label>
+                        <textarea rows="4" class="w-full px-4 py-2.5 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-brand-primary resize-none"></textarea>
+                    </div>
+                    <button class="w-full bg-brand-primary text-white py-3 rounded-md font-bold text-sm hover:bg-emerald-900 transition">
+                        Submit Inquiry
+                    </button>
+                </div>
+
+                <!-- 右侧 Direct Email Routing 区域 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 space-y-6">
+                    <h3 class="text-lg font-bold text-brand-primary">Direct Email Routing</h3>
+                    
+                    <div class="space-y-4 text-xs">
+                        <!-- 只保留 General Enquiries -->
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope text-brand-accent text-sm mt-0.5" contenteditable="false"></i>
+                            <div>
+                                <span class="text-gray-500 block">General Enquiries:</span>
+                                <a href="mailto:info@sylvenix.com" class="text-brand-primary hover:underline font-medium">info@sylvenix.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-6 mt-6">
+                        <span class="text-xs text-gray-400 block mb-1">Operating Base:</span>
+                        <div class="font-bold text-brand-primary text-sm">Alberta / Western Canada</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-primary text-white pt-12 pb-6 border-t border-brand-secondaryDark">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
+            <div class="space-y-3">
+                <div class="flex items-center gap-2" contenteditable="false">
+                    <img src="2.2_图标独立版_圆形.png" alt="Sylvenix Icon" class="h-8 w-8 brightness-200">
+                    <span class="brand-wordmark text-2xl text-brand-accent">SYLVENIX</span>
+                </div>
+                <p class="brand-tagline text-xs text-gray-300">Powering Nature. Connecting the Future.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-brand-accent mb-3 text-xs tracking-wider uppercase">Navigation</h4>
+                <ul class="space-y-1.5 text-xs text-gray-300">
+                    <li><a href="#about" onclick="showPage('about')">About Us</a></li>
+                    <li><a href="#what-we-do" onclick="showPage('what-we-do')">What We Do</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-brand-accent mb-3 text-xs tracking-wider uppercase">Markets & Corporate</h4>
+                <ul class="space-y-1.5 text-xs text-gray-300">
+                    <li><a href="#sourcing-markets" onclick="showPage('sourcing-markets')">Sourcing & Markets</a></li>
+                    <li><a href="#projects" onclick="showPage('projects')">Projects</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-brand-accent mb-3 text-xs tracking-wider uppercase">Social & Network</h4>
+                <div class="flex gap-4 text-xl" contenteditable="false">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-weixin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 border-t border-gray-700/60 pt-6 flex justify-between text-xs text-gray-400">
+            <p>&copy; Sylvenix Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 逻辑与导出功能 -->
+    <script contenteditable="false">
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.add('hidden'));
+            const target = document.getElementById(`page-${pageId}`);
+            if(target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleLanguage() {
+            const body = document.body;
+            body.classList.toggle('lang-en');
+            body.classList.toggle('lang-cn');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function saveChanges() {
+            const cloneDoc = document.documentElement.cloneNode(true);
+            const panel = cloneDoc.querySelector('div.fixed');
+            if(panel) panel.remove();
+            
+            const htmlContent = "<!DOCTYPE html>\n" + cloneDoc.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'index.html';
+            a.click();
+        }
+    </script>
+</body>
+</html>
